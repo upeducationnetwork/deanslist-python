@@ -5,7 +5,7 @@ Note that I don't think the API is very clear right now, so future versions may 
 
 There are two primary commands, `dl` and `dlall`
 
-`dl` gets submits a single request. Has two required arguments, reports and dlkeys, and an optional pulldate and
+`dl` gets submits a single request for each report. It has two required arguments, reports and dlkeys, and an optional pulldate and
 enddate. Finally, there is a rewrite option which can be 'a' or 'w'. If 'a', it will append the results to an existing file instead of re-writing the file.
 
 Reports expects a list of dicts of the form:
