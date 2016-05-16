@@ -1,1 +1,1 @@
-import deanslist
+from .deanslist import dl, dlall

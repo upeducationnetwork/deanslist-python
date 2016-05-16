@@ -16,13 +16,13 @@ def dl(reports, dlkeys):
     for outreport in allreports.keys():
         # Points and incidents require unique parsing
         if outreport == 'points':
-            writepoints('deanslist/points.csv', report=allreports[outreport])
+            writepoints('points.csv', report=allreports[outreport])
 
         elif outreport == 'coaching':
-            writecoaching('deanslist/coaching.csv', report=allreports[outreport])
+            writecoaching('coaching.csv', report=allreports[outreport])
 
         elif outreport == 'coaching_evidence':
-            writeevidence('deanslist/coaching_evidence.csv', report=allreports[outreport])
+            writeevidence('coaching_evidence.csv', report=allreports[outreport])
 
         elif outreport == 'incidents':
             writeincidents(report=allreports[outreport])
@@ -32,7 +32,7 @@ def dl(reports, dlkeys):
             dat = []
             for school in allreports[outreport]['data']:
                 dat.extend(school['data'])
-            writefile('deanslist/{0}.csv'.format(outreport), dataset=dat, rewrite=allreports[outreport]['write'])
+            writefile('{0}.csv'.format(outreport), dataset=dat, rewrite=allreports[outreport]['write'])
 
 
 
@@ -113,7 +113,7 @@ def dlall(outname, reporturl, startat, dlkeys, endat=datetime.date.today()):
 
     # Write to hard drive
     if len(alldat) > 0:
-        writefile('deanslist/{0}.csv'.format(outname), dataset=alldat, rewrite='w')
+        writefile('{0}.csv'.format(outname), dataset=alldat, rewrite='w')
 
 
 
@@ -253,7 +253,7 @@ def writeincidents(report):
     # Export
     exportdict = {'incidents': incidents, 'incidents-penalties': penalties, 'incidents-actions': actions, 'incidents-custfields': custfields}
     for key in exportdict:
-        writefile('deanslist/{0}.csv'.format(key), dataset=exportdict[key], rewrite='w')
+        writefile('{0}.csv'.format(key), dataset=exportdict[key], rewrite='w')
 
 def writecoaching(outname, report):
     # Flatten
