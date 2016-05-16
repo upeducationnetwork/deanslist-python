@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='deanslist',
-    version='0.1.1',
+    version='0.1.2',
     packages=['deanslist'],
     url='https://github.com/upeducationnetwork/deanslist-python',
     license='MIT',
