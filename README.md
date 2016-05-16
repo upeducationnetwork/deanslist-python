@@ -3,7 +3,7 @@ Simple python wrapper for the Deanslist API that flattens the json response and 
 
 Note that I don't think the API is very clear right now, so future versions may break the API.
 
-There are two primary commands, `dl` and `dl_all`
+There are two primary commands, `dl` and `dlall`
 
 `dl` gets submits a single request. Has two required arguments, reports and dlkeys, and an optional pulldate and
 enddate. Finally, there is a rewrite option which can be 'a' or 'w'. If 'a', it will append the results to an existing file instead of re-writing the file.
@@ -38,5 +38,5 @@ deanslist.dl(reports, dlkeys)
 
 ```
 
-`dl_all` gets all data between two dates, submitting a separate request for each date.
+`dlall` gets all data between two dates, submitting a separate request for each date.
 This is useful for transferring large amounts of data.

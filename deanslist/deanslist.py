@@ -70,7 +70,7 @@ def dlrequest(reports, dlkeys):
             futures.append(session.get(url,
                             params={'sdt': ireport.get('pulldate', ''),
                                     'edt': ireport.get('enddate', ''),
-                                    'apikey': dlkey['key']},
+                                    'apikey': dlkey},
                             background_callback=lambda sess, resp, outname=outname: bg_call(sess, resp, outname)))
 
     # Parse errors in the results
@@ -88,13 +88,25 @@ def dlrequest(reports, dlkeys):
 
 
 
-def dlall(outname, reporturl, startat, dlkeys, endat=datetime.date.today()):
+def dlall(outname, reporturl, startat, dlkeys, endat=''):
     # Get all data for large datasets by sending a separate request for each week of data
 
     one_week = datetime.timedelta(days=7)
     one_day = datetime.timedelta(days=1)
 
-    sdt = datetime.datetime.strptime(startat, '%Y-%m-%d').date()
+    try:
+        sdt = datetime.datetime.strptime(startat, '%Y-%m-%d')
+    except ValueError:
+        raise ValueError("Incorrect data format for startat, should be YYYY-MM-DD")
+
+    if endat != '':
+        try:
+            endat = datetime.datetime.strptime(endat, '%Y-%m-%d')
+        except ValueError:
+            raise ValueError("Incorrect data format for endat, should be YYYY-MM-DD")
+    else:
+        endat = datetime.date.today()
+
     edt = sdt + one_week
 
     alldat = []
@@ -133,7 +145,7 @@ def dlrequest_single(reporturl, sdt, edt, dlkeys, session = FuturesSession(max_w
         futures.append(session.get(url,
                         params={'sdt': sdt,
                                 'edt': edt,
-                                'apikey': dlkey['key']}))
+                                'apikey': dlkey}))
 
     # Parse errors in the results
     for f in futures:
