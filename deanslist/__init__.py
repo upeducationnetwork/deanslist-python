@@ -1,1 +1,1 @@
-import .deanslist
+import deanslist
