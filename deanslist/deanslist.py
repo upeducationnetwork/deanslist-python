@@ -95,13 +95,13 @@ def dlall(outname, reporturl, startat, dlkeys, endat=''):
     one_day = datetime.timedelta(days=1)
 
     try:
-        sdt = datetime.datetime.strptime(startat, '%Y-%m-%d')
+        sdt = datetime.datetime.strptime(startat, '%Y-%m-%d').date()
     except ValueError:
         raise ValueError("Incorrect data format for startat, should be YYYY-MM-DD")
 
     if endat != '':
         try:
-            endat = datetime.datetime.strptime(endat, '%Y-%m-%d')
+            endat = datetime.datetime.strptime(endat, '%Y-%m-%d').date()
         except ValueError:
             raise ValueError("Incorrect data format for endat, should be YYYY-MM-DD")
     else:
