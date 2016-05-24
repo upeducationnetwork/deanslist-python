@@ -55,8 +55,11 @@ def dlrequest(reports, dlkeys):
 
     # This is run in background once the download is completed
     def bg_call(sess, resp, outname):
-        dat = resp.json()
-        allreports[outname]['data'].append(dat)
+        if resp.status_code == 200:
+            dat = resp.json()
+            allreports[outname]['data'].append(dat)
+        else:
+            logging.warning('Response code {0} for {1}'.format(resp.status_code, resp.url))
 
     # Throw the requests at Deanslist
     for ireport in reports:
@@ -76,12 +79,9 @@ def dlrequest(reports, dlkeys):
     # Parse errors in the results
     for f in futures:
         try:
-            response = f.result()
+            f.result()
         except:
-            logging.exception('No data.')
-            raise
-        if response.status_code != 200:
-            logging.warning('Response code {0} for {1}'.format(response.status_code, response.url))
+            logging.warning('{0}'.format(f.exception))
             continue
 
     return allreports
@@ -191,6 +191,9 @@ def writefile(outname, dataset, headers=None, rewrite='a'):
 
 def writepoints(outname, report):
     # Parse and write points
+    if 'data' not in report['data']:
+        logging.warning('No points data')
+        return
 
     points = []
     # Flatten
