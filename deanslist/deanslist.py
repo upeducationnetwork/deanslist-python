@@ -88,7 +88,7 @@ def dlrequest(reports, dlkeys):
 
 
 
-def dlall(outname, reporturl, startat, dlkeys, endat=''):
+def dlall(outname, reporturl, startat, dlkeys, endat='', max_workers=5):
     # Get all data for large datasets by sending a separate request for each week of data
 
     one_week = datetime.timedelta(days=7)
@@ -111,7 +111,7 @@ def dlall(outname, reporturl, startat, dlkeys, endat=''):
 
     alldat = []
     
-    session = FuturesSession(max_workers=10)
+    session = FuturesSession(max_workers=max_workers)
 
     while edt < endat + one_week:
 
