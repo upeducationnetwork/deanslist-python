@@ -1,4 +1,9 @@
 # deanslist-python
+
+Note that Do Now Solutions has a separate Python wrapper for the Deanslist API. Would recommend using their version!
+
+https://github.com/donowsolutions/deanslist
+
 Simple python wrapper for the Deanslist API that flattens the json response and writes a csv file to the current directory.
 
 Note that I don't think the API is very clear right now, so future versions may break the API.
